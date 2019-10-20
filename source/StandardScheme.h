@@ -4,18 +4,19 @@
 #include "InitialSpectra.h"
 #include "Segmentation.h"
 #include "Constants.h"
+#include "Matrix.h"
 
-class AdiabaticScheme: public BaseScheme
+class StandardScheme: public BaseScheme
 // The implementation of the numerical scheme with
 // included adiabaticity
 {
 	public:
-		AdiabaticScheme(int given_MyRank, int given_CommSize);
+		StandardScheme(int given_MyRank, int given_CommSize);
 
 		void Initialise();
 		void Process();
 
-		~AdiabaticScheme();
+		~StandardScheme();
 
 	protected:
 		// Energy spectra to be used in the integrals etc.
@@ -43,6 +44,10 @@ class AdiabaticScheme: public BaseScheme
 		int* ScatterCounts;
 		int* ScatterDisplacements;
 
+		// Something for the scattering
+		int* GatherCounts;
+		int* GatherDisplacements;
+
 		// Data to be used in the calculational process
 		Matrix* p_even;
 		Matrix* m_even;
@@ -61,4 +66,34 @@ class AdiabaticScheme: public BaseScheme
 		// and these will become 'old' ones
 		Matrix* old_p; Matrix* old_antip;
 		Matrix* old_m; Matrix* old_antim;
+
+		// Spectra buffers; used in integrals
+		double* Spec_e;
+		double* Spec_x;
+
+		double* Spec_antie;
+		double* Spec_antix;
+
+		double* Spec_nu;
+		double* Spec_antinu;
+
+		// Buffer which contains the constant terms in Hamiltonians,
+		// depends only on energy
+		Matrix* H_0_mesh;
+
+		// The very start time stamp of the calculations
+		double Start_time;
+
+		// Some temporary buffers used for interchanges
+		Complex* LeftSend_buf;
+		Complex* RightSend_buf;
+
+		Complex* LeftRecv_buf;
+		Complex* RightRecv_buf;
+
+		// Matrices of the derivatives in the RK algorithm
+		Matrix* K1;
+		Matrix* K2;
+		Matrix* K3;
+		Matrix* K4;
 };

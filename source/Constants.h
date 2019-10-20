@@ -36,6 +36,7 @@ namespace ph
 const int    NUM_HARMONICS = 25;
 const double eps_ex = 0.0;       // Amplitude of inhomogenity in initial conditions (inhomogeneity of the off-diag. element)
 const double eps_mu = 0.1;       // Inhomogenetity in the luminosity
+const int    K      = 0;         // Might be used if we were studying instabilities as Duan did
 
 /* MAIN CONSTANTS */
 
@@ -56,7 +57,7 @@ const double theta = 9.0  * ph::deg;
 // Difference between the squared masses
 const double dm2   = 2.5e-3 * ph::eV*ph::eV;
 // Constant level of the concentration, the 'luminosity'
-const double n0    = 1.0e27 / cubed(ph::cm);
+const double n0    = 1.0e28 / cubed(ph::cm);
 
 // Different functions of the angles, which take place in the equation
 const double c2omega  = cos(2*omega);
@@ -87,7 +88,7 @@ const double Xmax = 50.0 * ph::km;
 // The length of the grid
 const double L = Xmax - Xmin; 
 // Number of points of this grid
-const int N_X  = 700;
+const int N_X  = 300;
 // Step of this grid
 const double dX = Xmax / N_X;
 
@@ -99,7 +100,7 @@ const double Z_displacement = 50 * ph::km;
 // Number of points to be saved in the binaries
 const int N_Z = 500;
 // Period of the z-grid: i.e. every STEP_Z'th point of the real grid will be placed in the output
-const int STEP_Z = 10;
+const int STEP_Z = 5;
 // Full number of points in the real z-grid, without the initial ones
 const int COUNT_Z = N_Z * STEP_Z;            
 // Step of the grid 
@@ -109,7 +110,5 @@ const double dZ = Z_displacement / COUNT_Z;
 
 // To normalise the density matrices after each iteration or not (recovering their hermitance and trace)
 #define NORM true
-// To evaluate the adiabaticity factor or not
-#define AD true
 
 #endif

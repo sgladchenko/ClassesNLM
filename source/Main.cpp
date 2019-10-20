@@ -1,4 +1,4 @@
-#include "AdiabaticScheme.h"
+#include "StandardScheme.h"
 
 int main(int argc, char** argv)
 {
@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 	MPI_Comm_rank(MPI_COMM_WORLD, &MyRank);
 
 	// Scheme object
-	AdiabaticScheme Scheme(MyRank, CommSize);
+	StandardScheme Scheme(MyRank, CommSize);
 
 	// Initialise the grids and other data
 	Scheme.Initialise();
